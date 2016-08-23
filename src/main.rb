@@ -7,17 +7,25 @@ class Runner
       program = parse_instructions(program)
     end
     table = Table.new
+    result = []
     program.each { |instruction|
-      execute_verbose(instruction, table)
+      stmt_result = execute_verbose(instruction, table)
+      result.push(stmt_result.output) if stmt_result.output
     }
+    result
   end
 
   def execute_verbose(instruction, table)
-    result = execute(instruction, table)
-    puts result.to_s
+    execute(instruction, table, true)
   end
 
-  def execute(instruction, table)
+  def execute(instruction, table, verbose=false)
+    result = execute_result(instruction, table)
+    puts result.to_s if verbose
+    result
+  end
+
+  def execute_result(instruction, table)
     case instruction.opcode
       when :LEFT
         result = table.left
@@ -44,6 +52,8 @@ class ExecutionResult
     @instruction = instruction
     @output = output
   end
+
+  attr_reader :output
 
   def to_s
     case @result_type
