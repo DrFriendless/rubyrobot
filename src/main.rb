@@ -2,21 +2,17 @@ require_relative './table'
 require_relative './parser'
 
 class Runner
-  def run(program)
+  def run(program, verbose)
     if program.is_a? String
       program = parse_instructions(program)
     end
     table = Table.new
     result = []
     program.each { |instruction|
-      stmt_result = execute_verbose(instruction, table)
+      stmt_result = execute(instruction, table, verbose)
       result.push(stmt_result.output) if stmt_result.output
     }
     result
-  end
-
-  def execute_verbose(instruction, table)
-    execute(instruction, table, true)
   end
 
   def execute(instruction, table, verbose=false)
@@ -71,6 +67,6 @@ if ARGV.length > 0
   ARGV.each { |filename|
     text = File.open(filename).read
     runner = Runner.new
-    runner.run(text.gsub(/\n/, ";"))
+    runner.run(text, true)
   }
 end

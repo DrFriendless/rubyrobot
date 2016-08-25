@@ -56,7 +56,7 @@ assert(parse_instruction(' PLACE 0 , 2 , NORTH ', -1).position.y == 2)
 assert(parse_instruction(' PLACE 0 , 2 , NORTH ', -1).position.direction == :NORTH)
 
 # test the multi-line parser
-assert_equal(2, parse_instructions("LEFT; RIGHT").length)
+assert_equal(2, parse_instructions("LEFT\n RIGHT").length)
 assert_equal(1, parse_instructions("MOVE").length)
-assert_equal(2, parse_instructions("place 0,0,north; move").length)
-assert_equal([:LEFT, :RIGHT, :MOVE, :REPORT, :PLACE], parse_instructions("left; right; move; report; place 0,0,east").map { |i| i.opcode })
+assert_equal(2, parse_instructions("place 0,0,north\n move").length)
+assert_equal([:LEFT, :RIGHT, :MOVE, :REPORT, :PLACE], parse_instructions("left\n right\n move\n report\n place 0,0,east").map { |i| i.opcode })

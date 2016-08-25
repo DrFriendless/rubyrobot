@@ -42,6 +42,6 @@ end
 def anticlockwise(dir)
   return nil unless valid_direction?(dir)
   i = DIRECTION_IN_ORDER.index(dir)
-  i = (i + DIRECTION_IN_ORDER.length) % DIRECTION_IN_ORDER.length
+  i = (i + DIRECTION_IN_ORDER.length - 1) % DIRECTION_IN_ORDER.length
   DIRECTION_IN_ORDER[i]
 end

@@ -37,7 +37,7 @@ def parse_instruction(orig, lineno)
 end
 
 def parse_instructions(s)
-  lines = s.split(';')
+  lines = s.split(/\n/)
   # no you can't have blank lines in your program!
   lines.map.with_index { |line, index| parse_instruction(line, index) }
 end

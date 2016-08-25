@@ -1,4 +1,3 @@
-
 MAXX = 4
 MAXY = 4
 
@@ -62,6 +61,9 @@ class Position
   require_relative './instructions'
 
   def initialize(x, y, direction)
+    raise InvalidPosition.new("X undefined") unless x
+    raise InvalidPosition.new("Y undefined") unless y
+    raise InvalidDirection.new("direction undefined") unless direction
     raise InvalidPosition.new("X coordinate out of range") unless x.between?(0, MAXX)
     raise InvalidPosition.new("Y coordinate out of range") unless y.between?(0, MAXY)
     raise InvalidDirection.new("Invalid direction") unless valid_direction?(direction)
