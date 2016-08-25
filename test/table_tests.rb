@@ -47,12 +47,14 @@ assert_equal("2,2,EAST", position_after { |t| t.place(Position.new(1,2,:EAST)); 
 assert_equal("1,1,SOUTH", position_after { |t| t.place(Position.new(1,2,:SOUTH)); t.move })
 assert_equal("1,2,NORTH", position_after { |t| t.place(Position.new(1,2,:EAST)); t.left })
 assert_equal("1,2,SOUTH", position_after { |t| t.place(Position.new(1,2,:EAST)); t.right })
-# without a PLACE there is no position to return from report
-assert_raise(InvalidPosition) { position_after { |t| t } }
+# without a PLACE there is no position to return from report, so it returns nil
+assert_nil(position_after { |t| t })
+assert_nil(position_after { |t| t.left })
+assert_nil(position_after { |t| t.right })
+assert_nil(position_after { |t| t.move })
+# you can't even try to place the robot off the table
 assert_raise(InvalidPosition) { position_after { |t| t.place(Position.new(MAXX+1,MAXY+1,:EAST)) } }
-assert_raise(InvalidPosition) { position_after { |t| t.left } }
-assert_raise(InvalidPosition) { position_after { |t| t.right } }
-assert_raise(InvalidPosition) { position_after { |t| t.move } }
+assert_raise(InvalidPosition) { position_after { |t| t.place(Position.new(-1,-1,:EAST)) } }
 
 # quick way to create a table
 def tab(x,y,direction)

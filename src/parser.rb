@@ -39,7 +39,7 @@ end
 def parse_instructions(s)
   lines = s.split(/\n/)
   # no you can't have blank lines in your program!
-  lines.map.with_index { |line, index| parse_instruction(line, index) }
+  lines.map.with_index { |line, index| parse_instruction(line, index+1) }
 end
 
 class ParseError < Exception

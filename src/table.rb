@@ -40,6 +40,7 @@ class Table
   end
 
   def report
+    return nil unless @x && @y && @direction
     Position.new(@x, @y, @direction).to_s
   end
 end

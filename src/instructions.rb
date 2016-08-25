@@ -6,9 +6,9 @@ class Instruction
 
   attr_reader :opcode
 
-  def to_s
-    opcode.to_s
-  end
+ def to_s
+   opcode.to_s
+ end
 end
 
 class Place < Instruction
